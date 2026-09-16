@@ -3,6 +3,7 @@ from pydantic import BaseModel
 
 from backend.scanner.url_analyzer import analyze_url
 from backend.scanner.scoring import calculate_risk
+from backend.scanner.dns_analyzer import analyze_dns
 
 app = FastAPI(title="LinkTrust API")
 
@@ -21,10 +22,16 @@ def scan_url(request: URLRequest):
 
 	analysis  = analyze_url(request.url)
 
+	dns = None
+
+	if analysis["valid"] and not analysis["is_ip"]:
+		dns = analyze_dns(analysis["domain"])
+
 	risk = calculate_risk(analysis)
 
 	return  {
 		"analysis": analysis,
+		"dns": dns,
 		"risk": risk
 	}
 
