@@ -1,4 +1,4 @@
-from urllib.parse import urlparse
+from urllib.parse import urlparse, unquote
 import ipaddress
 
 SUSPICIOUS_TLDS = { 
@@ -124,7 +124,7 @@ def analyze_url(url: str):
 
 	# URL encoding 
 
-	decoded_url = unqoute(url)
+	decoded_url = unquote(url)
 
 	if decoded_url != url:
 		result["suspicious"] = True

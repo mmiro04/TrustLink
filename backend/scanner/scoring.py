@@ -12,7 +12,7 @@ def calculate_risk(analysis):
 		if "IP address" in indicator:
 			score += 25
 		elif "HTTPS" in indicator:
-			scoore += 10
+			score += 10
 		elif "suspicious TLD" in indicator:
 			score += 15
 		elif "Punycode" in indiicator:
