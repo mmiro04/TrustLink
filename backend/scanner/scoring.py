@@ -3,27 +3,40 @@ def calculate_risk(analysis):
 	score = 0
 	reasons = []
 
-	# HTTPS
-	if not analysis["https"]:
-		score += 10
-		reasons.append("Connectin does not use HTTPS")
+	indicators = analysis["indicators"]
 
-	# IP address instead of domain
-	if analysis["is_ip"]:
-		score += 25
-		reasons.append("URL uses an IP address instead of a domain")
-		
-	# Exisiting suspicious findings
-	if analysis ["suspicious"]:
-		score += 10
+	# score individual indicators
 	
-	# Specific suspicious indicators
-	for reason in analysis["reasons"]:
-		if "@" in reason:
+	for indicator in indicators:
+
+		if "IP address" in indicator:
+			score += 25
+		elif "HTTPS" in indicator:
+			scoore += 10
+		elif "suspicious TLD" in indicator:
 			score += 15
-	
-		if "unusually long" in reason:
+		elif "Punycode" in indiicator:
+			score += 20
+		elif "@ character" in indicator:
+			score += 20
+		elif "encoded characters" in indicator:
 			score += 10
+		elif "unusually long" in indicator:
+			score += 10
+		elif "unusually  large nummber of subdomains" in indicator:
+			score += 15
+		elif "multiple hyphens" in indicator:
+			score += 10
+		elif "embeded username oor password" in indicator:
+			score += 20
+		elif "unusual port" in indicator:
+			score += 10
+		elif "consecutive slashes" in indicator:
+			score += 5
+		else:
+			score +=5 
+
+		reasons.append(indicator)
 
 	# Prevent score from exceeding 100
 	score = min(score, 100)
