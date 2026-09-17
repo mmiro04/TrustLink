@@ -50,7 +50,7 @@ def calculate_risk(
 		if dns["errors"]:
 			score += 10
 
-			resons.append(
+			reasons.append(
 				"DNS analysis encountered an error"
 			)
 		if not dns["a"] and not dns["aaaa"]:
