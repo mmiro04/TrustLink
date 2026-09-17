@@ -39,7 +39,12 @@ def scan_url(request: URLRequest):
 				analysis["port"] or 443
 			)
 
-	risk = calculate_risk(analysis)
+	risk = calculate_risk(
+		analysis,
+		dns,
+		ssl_info,
+		redirects
+	)
 
 	return  {
 		"analysis": analysis,
