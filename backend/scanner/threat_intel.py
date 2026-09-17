@@ -92,8 +92,8 @@ def check_virustotal(url: str):
 
             time.sleep(2)
 
-        result["error"] = None
-	result["status"] = "pending"
+        result["error"] =None
+        result["status"] ="pending"
 
     except requests.RequestException as e:
         result["error"] = str(e)
