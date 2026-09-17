@@ -1,4 +1,4 @@
-def calculate_risk(analysis,dns=None, ssl_info=None, redirects=None):
+def calculate_risk(analysis, dns=None, ssl_info=None, redirects=None):
 
 	score = 0
 	reasons = []
@@ -15,7 +15,7 @@ def calculate_risk(analysis,dns=None, ssl_info=None, redirects=None):
 			score += 10
 		elif "suspicious TLD" in indicator:
 			score += 15
-		elif "Punycode" in indiicator:
+		elif "Punycode" in indicator:
 			score += 20
 		elif "@ character" in indicator:
 			score += 20
