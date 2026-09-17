@@ -92,10 +92,8 @@ def check_virustotal(url: str):
 
             time.sleep(2)
 
-        result["error"] = (
-            "VirusTotal analysis did not complete within "
-            "the timeout period"
-        )
+        result["error"] = None
+	result["status"] = "pending"
 
     except requests.RequestException as e:
         result["error"] = str(e)

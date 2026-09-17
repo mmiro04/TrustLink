@@ -47,7 +47,8 @@ def scan_url(request: URLRequest):
 		analysis,
 		dns,
 		ssl_info,
-		redirects
+		redirects,
+		threat_intel
 	)
 
 	return  {

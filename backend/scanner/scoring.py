@@ -1,4 +1,10 @@
-def calculate_risk(analysis, dns=None, ssl_info=None, redirects=None):
+def calculate_risk(
+	analysis,
+ 	dns=None,	
+	ssl_info=None,
+	redirects=None,
+	threat_intel=None
+):
 
 	score = 0
 	reasons = []
@@ -84,7 +90,26 @@ def calculate_risk(analysis, dns=None, ssl_info=None, redirects=None):
 				score += 5
 
 				reasons.append("URL redirects to a different final destination")
+
+	# Threat intelligence
+	if threat_intel:
 	
+		if threat_intel["error"]:
+			reasons.append("Threat intelligence check could not be completed")
+
+		elif threat_intel["available"]:
+			malicious = threat_intel["malicious"]
+			suspicious = threat_intel["suspicious"]
+	
+			if malicious > 0:
+				score += 50
+
+				reasons.append(f"VirusTotal detected {malicious} malicious result(s)")	
+
+			if suspicious > 0:
+				score += 20
+
+				reasons.append(f"VirusTotal detected {suspicious} suspicious result(s)")
 	
 	# Prevent score from exceeding 100
 	score = min(score, 100)
