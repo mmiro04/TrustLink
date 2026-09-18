@@ -1,45 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>LinkTrust</title>
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>LinkTrust | URL Security Scanner</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
     <main class="container">
 
-        <h1>LinkTrust</h1>
 
-        <p class="subtitle">
-            Analyze a URL for potential security threats.
-        </p>
+        <!-- HEADER -->
 
-        <div class="scanner">
+        <header>
+
+            <h1>LinkTrust</h1>
+
+            <p class="subtitle">
+                URL SECURITY & THREAT ANALYSIS
+            </p>
+
+        </header>
+
+
+        <!-- URL SCANNER -->
+
+        <section class="scanner">
 
             <input
                 type="text"
                 id="urlInput"
-                placeholder="Enter a URL, e.g. https://example.com"
+                placeholder="Enter target URL..."
+                autocomplete="off"
             >
 
             <button id="scanButton">
-                Scan URL
+                SCAN
             </button>
 
-        </div>
+        </section>
+
+
+        <!-- LOADING -->
 
         <div id="loading" class="hidden">
-            Scanning...
+            ANALYZING TARGET...
         </div>
+
+
+        <!-- RESULTS -->
 
         <div id="result" class="hidden">
 
-            <div class="risk-card">
+
+            <!-- RISK -->
+
+            <section class="risk-card">
 
                 <h2 id="riskLevel">
                     -
@@ -49,21 +77,83 @@
                     0
                 </div>
 
-            </div>
+            </section>
 
-            <div class="section">
 
-                <h3>Reasons</h3>
+            <!-- URL ANALYSIS -->
+
+            <section class="section">
+
+                <h3>URL Analysis</h3>
+
+                <div id="urlAnalysis" class="data-grid"></div>
+
+            </section>
+
+
+            <!-- DNS -->
+
+            <section class="section">
+
+                <h3>DNS Analysis</h3>
+
+                <div id="dnsAnalysis" class="data-grid"></div>
+
+            </section>
+
+
+            <!-- TLS -->
+
+            <section class="section">
+
+                <h3>TLS / SSL</h3>
+
+                <div id="sslAnalysis" class="data-grid"></div>
+
+            </section>
+
+
+            <!-- REDIRECTS -->
+
+            <section class="section">
+
+                <h3>Redirect Analysis</h3>
+
+                <div id="redirectAnalysis" class="data-grid"></div>
+
+            </section>
+
+
+            <!-- THREAT INTELLIGENCE -->
+
+            <section class="section">
+
+                <h3>Threat Intelligence</h3>
+
+                <div id="threatIntel" class="data-grid"></div>
+
+            </section>
+
+
+            <!-- REASONS -->
+
+            <section class="section">
+
+                <h3>Detected Indicators</h3>
 
                 <ul id="reasons"></ul>
 
-            </div>
+            </section>
+
 
         </div>
 
+
     </main>
+
 
     <script src="app.js"></script>
 
 </body>
+
 </html>
