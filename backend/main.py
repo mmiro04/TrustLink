@@ -8,6 +8,7 @@ from backend.scanner.dns_analyzer import analyze_dns
 from backend.scanner.ssl_analyzer import analyze_ssl
 from backend.scanner.redirect_analyzer import analyze_redirects
 from backend.scanner.threat_intel import check_virustotal
+from backend.scanner.url_security import validate_url_for_request
 
 app = FastAPI(title="LinkTrust API")
 
@@ -36,42 +37,63 @@ def home():
 @app.post("/scan")
 def scan_url(request: URLRequest):
 
-	analysis  = analyze_url(request.url)
+    analysis = analyze_url(request.url)
 
-	dns = None
-	ssl_info = None
-	redirects = None
-	threat_intel = None
+    dns = None
+    ssl_info = None
+    redirects = None
+    threat_intel = None
 
-	if analysis["valid"] and not analysis["is_ip"]:
-		dns = analyze_dns(analysis["domain"])
+    if analysis["valid"]:
 
-		redirects = analyze_redirects(request.url)
-		
-		threat_intel = check_virustotal(request.url)
+        allowed, reason = validate_url_for_request(
+            request.url
+        )
 
-		if analysis["https"]:
-			ssl_info = analyze_ssl(
-				analysis["domain"],
-				analysis["port"] or 443
-			)
+        if not allowed:
 
-	risk = calculate_risk(
-		analysis,
-		dns,
-		ssl_info,
-		redirects,
-		threat_intel
-	)
+            redirects = {
+                "url": request.url,
+                "final_url": None,
+                "redirect_count": 0,
+                "redirect_chain": [],
+                "error": f"Request blocked: {reason}"
+            }
 
-	return  {
-		"analysis": analysis,
-		"dns": dns,
-		"ssl": ssl_info,
-		"redirects": redirects,
-		"threat_intel": threat_intel,
-		"risk": risk
+        elif not analysis["is_ip"]:
 
-	}
+            dns = analyze_dns(
+                analysis["domain"]
+            )
 
+            redirects = analyze_redirects(
+                request.url
+            )
 
+            threat_intel = check_virustotal(
+                request.url
+            )
+
+            if analysis["https"]:
+
+                ssl_info = analyze_ssl(
+                    analysis["domain"],
+                    analysis["port"] or 443
+                )
+
+    risk = calculate_risk(
+        analysis,
+        dns,
+        ssl_info,
+        redirects,
+        threat_intel
+    )
+
+    return {
+        "analysis": analysis,
+        "dns": dns,
+        "ssl": ssl_info,
+        "redirects": redirects,
+        "threat_intel": threat_intel,
+        "risk": risk
+    }
