@@ -8,10 +8,11 @@ The project combines URL structure analysis, DNS inspection, TLS/SSL analysis, r
 
 ## Live Demo
 
-🚀 **Try LinkTrust:**  
-[Live Demo](#)
+🚀 **Try LinkTrust online:**  
 
-> The live demo will be added after deployment.
+[https://mmiro04.github.io/TrustLink/](https://mmiro04.github.io/TrustLink/)
+
+No installation required.
 
 ## Features
 
