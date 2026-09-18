@@ -21,7 +21,7 @@ def calculate_risk(
 			score += 10
 		elif "suspicious TLD" in indicator:
 			score += 15
-		elif "Punycode" in indicator:
+		elif "punycode" in indicator.lower():
 			score += 20
 		elif "@ character" in indicator:
 			score += 20

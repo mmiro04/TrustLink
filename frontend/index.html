@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LinkTrust</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="container">
+
+        <h1>LinkTrust</h1>
+
+        <p class="subtitle">
+            Analyze a URL for potential security threats.
+        </p>
+
+        <div class="scanner">
+
+            <input
+                type="text"
+                id="urlInput"
+                placeholder="Enter a URL, e.g. https://example.com"
+            >
+
+            <button id="scanButton">
+                Scan URL
+            </button>
+
+        </div>
+
+        <div id="loading" class="hidden">
+            Scanning...
+        </div>
+
+        <div id="result" class="hidden">
+
+            <div class="risk-card">
+
+                <h2 id="riskLevel">
+                    -
+                </h2>
+
+                <div id="riskScore">
+                    0
+                </div>
+
+            </div>
+
+            <div class="section">
+
+                <h3>Reasons</h3>
+
+                <ul id="reasons"></ul>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <script src="app.js"></script>
+
+</body>
+</html>
