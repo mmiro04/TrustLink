@@ -17,7 +17,7 @@ def calculate_risk(
 
 		if "IP address" in indicator:
 			score += 25
-		elif "HTTPS" in indicator:
+		elif "does not use HTTPS" in indicator:
 			score += 10
 		elif "suspicious TLD" in indicator:
 			score += 15
@@ -29,11 +29,11 @@ def calculate_risk(
 			score += 10
 		elif "unusually long" in indicator:
 			score += 10
-		elif "unusually  large nummber of subdomains" in indicator:
+		elif "unusually large nummber of subdomains" in indicator:
 			score += 15
 		elif "multiple hyphens" in indicator:
 			score += 10
-		elif "embeded username oor password" in indicator:
+		elif "embeded username or password" in indicator:
 			score += 20
 		elif "unusual port" in indicator:
 			score += 10
@@ -48,12 +48,11 @@ def calculate_risk(
 	
 	if dns:
 		if dns["errors"]:
-			score += 10
 
 			reasons.append(
 				"DNS analysis encountered an error"
 			)
-		if not dns["a"] and not dns["aaaa"]:
+		if not dns["errors"] and not dns["a"] and not dns["aaaa"]:
 			score += 20
 			reasons.append("Domain has no A or AAAA DNS records")
 
@@ -62,7 +61,6 @@ def calculate_risk(
 	if analysis["https"]:
 		if ssl_info:
 			if ssl_info["error"]:
-				score += 20
 
 				reasons.append("SSL/TLS connection could not be verified")
 			elif ssl_info["days_until_expiry"] is not None:
@@ -81,7 +79,7 @@ def calculate_risk(
 		if redirects["redirect_count"] >=3:
 			score +=15
 
-			reasons.append("URL ures multiple redirects")
+			reasons.append("URL uses multiple redirects")
 		if redirects["final_url"]:
 			original_url = analysis["url"].rstrip("/")
 			final_url = redirects["final_url"].rstrip("/")
