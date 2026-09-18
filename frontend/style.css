@@ -1,0 +1,101 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    color: #222;
+}
+
+.container {
+    width: 90%;
+    max-width: 900px;
+    margin: 80px auto;
+    text-align: center;
+}
+
+h1 {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #666;
+    margin-bottom: 35px;
+}
+
+.scanner {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+#urlInput {
+    flex: 1;
+    padding: 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+#scanButton {
+    padding: 15px 25px;
+    border: none;
+    border-radius: 8px;
+    background: #222;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#scanButton:hover {
+    opacity: 0.85;
+}
+
+.hidden {
+    display: none;
+}
+
+#loading {
+    margin: 20px;
+    font-weight: bold;
+}
+
+.risk-card {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+#riskLevel {
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+#riskScore {
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.section {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    text-align: left;
+}
+
+.section h3 {
+    margin-bottom: 15px;
+}
+
+#reasons {
+    padding-left: 20px;
+}
+
+#reasons li {
+    margin-bottom: 8px;
+}
